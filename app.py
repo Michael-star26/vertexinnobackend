@@ -2,7 +2,7 @@ from Tools.scripts.parse_html5_entities import get_json
 from flask import *
 import pymysql
 from flask_cors import CORS
-connection=pymysql.connect(user='root',database='vertexlabs',host='localhost',password='')
+connection=pymysql.connect(user='sql7770379',database='sql7770379',host='sql7.freesqldatabase.com',password='zsJSBacLzW')
 app=Flask(__name__)
 CORS(app)
 @app.route('/Api/addArticle',methods=['POST','GET'])
