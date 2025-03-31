@@ -28,7 +28,7 @@ def addArticle():
             return jsonify({'message':'Article added successfuly'}),200
 
         except Exception as e:
-            return jsonify({'error':f"There was an error {e}"}),500
+            return jsonify({'error':f"There was an error {str(e)}"}),500
 
     return jsonify({'message':'Added sucessully'})
 @app.route('/Api/deleteArticles/<id>',methods=['POST','GET'])
@@ -51,7 +51,7 @@ def deleteArticles(id):
                     cursor.execute(deleteArticle,(id))
                     return jsonify({'message':'Article Deleted'},200)
                 except Exception as e:
-                    return jsonify({'error':f"There was an error {e}"},500)
+                    return jsonify({'error':f"There was an error {str(e)}"},500)
 
         except Exception as e:
             return jsonify({'error':'Server Error'},500)
