@@ -56,5 +56,5 @@ def deleteArticles(id):
         except Exception as e:
             return jsonify({'error':'Server Error'},500)
     return jsonify({'message':'deleted successfully'})
-if __name__=="__main__":
-    app.run(debug=True)
+# if __name__=="__main__":
+#     app.run(debug=True)
