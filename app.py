@@ -34,7 +34,7 @@ def addArticle():
 
 @app.route('/Api/getArticles',methods=['POST','GET'])
 def getArticles():
-    if request.method=='GET':
+    if request.method=='POST':
         try:
             sql="SELECT * FROM blog"
             cursor=connection.cursor()
