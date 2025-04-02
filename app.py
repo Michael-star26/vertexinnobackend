@@ -31,6 +31,23 @@ def addArticle():
             return jsonify({'error':f"There was an error {str(e)}"}),500
 
     return jsonify({'message':'Added sucessully'})
+
+@app.route('/Api/getArticles',methods=['POST','GET'])
+def getArticles():
+    if request.method=='GET':
+        try:
+            sql="SELECT * FROM blog"
+            cursor=connection.cursor()
+            cursor.execute(sql)
+            if cursor.rowcount==0:
+                return jsonify({'message':'No Articles Available'}),404
+            else:
+                article=cursor.fetchall()
+                return jsonify({'message':article}),200
+        except Exception as e:
+            return  jsonify({'message':'Server error'}),500
+    return jsonify({'message':'No Requests made'})
+    
 @app.route('/Api/deleteArticles/<id>',methods=['POST','GET'])
 def deleteArticles(id):
     if request.method=='post':
@@ -39,7 +56,7 @@ def deleteArticles(id):
             if not(data):
                 return jsonify({'error':'Error, Supply Article ID'},404)
             id = data.get('id')
-            sql="SELECT * FROM blog WHERE id=%s"
+            sql="SELECT FROM blog WHERE id=%s"
             cursor=connection.cursor()
             cursor.execute(sql,(id))
             if cursor.rowcount==0:
