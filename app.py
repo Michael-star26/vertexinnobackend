@@ -32,21 +32,23 @@ def addArticle():
 
     return jsonify({'message':'Added sucessully'})
 
-@app.route('/Api/getArticles',methods=['POST','GET'])
+@app.route('/Api/getArticles',methods=['GET','POST'])
 def getArticles():
-    if request.method=='POST':
-        try:
-            sql="SELECT * FROM blog"
-            cursor=connection.cursor()
-            cursor.execute(sql)
-            if cursor.rowcount==0:
-                return jsonify({'message':'No Articles Available'}),404
-            else:
-                article=cursor.fetchall()
-                return jsonify({'message':article}),200
-        except Exception as e:
-            return  jsonify({'message':'Server error'}),500
-    return jsonify({'message':'No Requests made'})
+    try:
+        sql = "SELECT * FROM blog"
+        cursor = connection.cursor(pymysql.cursors.DictCursor)
+        cursor.execute(sql)
+        article = cursor.fetchall()
+        return jsonify(article), 200
+        # if cursor.rowcount == 0:
+        #     return jsonify({'message': 'No Articles Available'}), 404
+        # else:
+        #     article = cursor.fetchall()
+        #     return jsonify(article), 200
+    except Exception as e:
+        return jsonify({'message': 'Server error'}), 500
+
+    # return jsonify({'message':'No requests found'})
     
 @app.route('/Api/deleteArticles/<id>',methods=['POST','GET'])
 def deleteArticles(id):
