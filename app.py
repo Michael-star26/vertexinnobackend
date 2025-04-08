@@ -15,8 +15,6 @@ def addArticle():
     #     connection = pymysql.connect(user='sql7770379', database='sql7770379', host='sql7.freesqldatabase.com',password='zsJSBacLzW')
     # except Exception as e:
     #     return jsonify({'message':'Failed to connect to DB'}
-    now=datetime.now()
-    today=now.strftime("%B %d, %Y")
     if request.method=='POST':
         try:
             data=request.get_json()
@@ -25,6 +23,8 @@ def addArticle():
             title = data.get('title')
             author = data.get('author')
             content = data.get('content')
+            now=datetime.now()
+            today=now.strftime("%B %d, %Y")
             date = today
             featuredImage = data.get('featuredImage')
             views = data.get('views')
